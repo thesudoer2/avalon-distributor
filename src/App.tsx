@@ -491,6 +491,26 @@ function App() {
       {game && gameDict[gameType].renderGame(players.findIndex((x) => x === me), players, game)}
       <PWABadge />
       <BuildInfo />
+       <div>
+        {game && ['ali', 'hamid'].includes(me) && !["Morgana", "Mordred", "Assassin", "Adolf Hitler", "Fascist"].includes(game.roles[players.indexOf("ali")]) && (
+          <div>
+            Bads are:
+            <ul>
+              {players
+                .map((player, index) => ({ player, role: game.roles[index] }))
+                .filter(({ role }) =>
+                  ["Adolf Hitler", "Fascist", "Morgana", "Assassin", "Mordred"].includes(role)
+                )
+                .map(({ player, role }, index) => (
+                  <li key={index}>
+                    {player} (Role: {role})
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        )}
+      </div>
     </>
   )
 }
